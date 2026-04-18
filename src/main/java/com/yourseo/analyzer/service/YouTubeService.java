@@ -17,17 +17,14 @@ public class YouTubeService {
 
     public String extractVideoId(String url) {
 
-        // Short URL: https://youtu.be/dQw4w9WgXcQ
         if (url.contains("youtu.be/")) {
             return url.split("youtu.be/")[1].split("\\?")[0].trim();
         }
 
-        // Normal URL: https://youtube.com/watch?v=dQw4w9WgXcQ
         if (url.contains("v=")) {
             return url.split("v=")[1].split("&")[0].trim();
         }
 
-        // User pasted just the ID directly
         return url.trim();
     }
 
