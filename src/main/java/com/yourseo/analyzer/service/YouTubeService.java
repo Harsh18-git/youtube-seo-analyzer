@@ -10,7 +10,7 @@ import java.util.Map;
 @Service
 public class YouTubeService {
 
-    @Value("${youtube.api.key}")
+    @Value("${YOUTUBE_API_KEY:default}")
     private String apiKey;
 
     private RestTemplate restTemplate = new RestTemplate();
