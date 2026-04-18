@@ -61,8 +61,6 @@ public class SEOAnalyzerService {
         if (!title.matches(".*\\d+.*"))
             list.add("🔢 Add a number to your title (e.g. '5 Tips...' or 'Top 10...')");
 
-        // Only suggest "how to" if it looks like an educational/tech video
-// Skip this suggestion for songs, movies, trailers
         boolean looksLikeSong = title.toLowerCase().contains("official video")
                 || title.toLowerCase().contains("official audio")
                 || title.toLowerCase().contains("lyrics")
