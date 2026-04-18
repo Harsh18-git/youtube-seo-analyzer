@@ -31,10 +31,9 @@ public class VideoController {
         VideoResponse result = new VideoResponse();
 
         try {
-            // 1. Extract video ID from URL
+            
             String videoId = youTubeService.extractVideoId(url);
 
-            // 2. Call YouTube API
             Map<String, Object> snippet = youTubeService.fetchVideoData(videoId);
 
             if (snippet.isEmpty()) {
@@ -42,13 +41,11 @@ public class VideoController {
                 return ResponseEntity.ok(result);
             }
 
-            // 3. Get title and description
             String title = (String) snippet.getOrDefault("title", "No title");
             String description = (String) snippet.getOrDefault("description", "");
             result.setTitle(title);
             result.setDescription(description);
 
-            // 4. Get thumbnail
             @SuppressWarnings("unchecked")
             Map<String, Object> thumbnails = (Map<String, Object>) snippet.get("thumbnails");
             if (thumbnails != null) {
@@ -61,13 +58,11 @@ public class VideoController {
                 }
             }
 
-            // 5. SEO Analysis
             result.setSeoScore(seoAnalyzerService.calculateScore(title, description));
             result.setTitleFeedback(seoAnalyzerService.getTitleFeedback(title));
             result.setDescriptionFeedback(seoAnalyzerService.getDescriptionFeedback(description));
             result.setSuggestions(seoAnalyzerService.generateSuggestions(title, description));
 
-            // 6. Generate tags
             result.setTags(tagGeneratorService.generateTags(title, description));
 
         } catch (Exception e) {
