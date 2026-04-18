@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube SEO Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark px-4">
+    <span class="navbar-brand fw-bold">🎬 YouTube SEO Analyzer</span>
+    <button id="themeBtn" class="btn btn-outline-light btn-sm ms-auto" onclick="toggleTheme()">
+        🌙 Dark Mode
+    </button>
+</nav>
+
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Analyze Your YouTube Video SEO</h2>
+        <p class="text-muted">Paste any YouTube URL and get your SEO score instantly</p>
+    </div>
+
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-8">
+            <div class="input-group input-group-lg">
+                <input id="videoUrl" type="text" class="form-control"
+                       placeholder="https://www.youtube.com/watch?v=...">
+                <button class="btn btn-danger px-4" onclick="analyzeVideo()">
+                    🔍 Analyze
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="text-center mt-4 d-none">
+        <div class="spinner-border text-danger"></div>
+        <p class="mt-2 text-muted">Fetching video data from YouTube...</p>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="d-none mt-5">
+        <div class="row g-4">
+
+            <!-- Thumbnail Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header fw-bold">🖼 Thumbnail Preview</div>
+                    <div class="card-body text-center">
+                        <img id="thumbnail" src="" class="img-fluid rounded mb-3" alt="Thumbnail">
+                        <a id="downloadBtn" href="#" download="thumbnail.jpg"
+                           class="btn btn-outline-danger btn-sm w-100">
+                            ⬇ Download Thumbnail
+                        </a>
+                        <p class="text-muted small mt-2">
+                            Tip: Use bright colors and bold text for better click rate
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Score Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header fw-bold">📊 SEO Score</div>
+                    <div class="card-body text-center">
+                        <div id="scoreCircle" class="score-circle mx-auto mb-3">
+                            <span id="scoreNumber">0</span>
+                        </div>
+                        <p><strong>Title:</strong> <span id="titleFeedback" class="badge"></span></p>
+                        <p><strong>Description:</strong> <span id="descFeedback" class="badge"></span></p>
+                        <p class="small text-muted mt-2" id="titleDisplay"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tags Card -->
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-header fw-bold">🏷 Generated Tags</div>
+                    <div class="card-body">
+                        <div id="tagsContainer"></div>
+                        <button class="btn btn-outline-secondary btn-sm mt-3 w-100"
+                                onclick="copyTags()">
+                            📋 Copy All Tags
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggestions Card -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header fw-bold">💡 SEO Suggestions</div>
+                    <div class="card-body">
+                        <ul id="suggestionsList" class="list-group list-group-flush"></ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
